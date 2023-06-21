@@ -38,9 +38,8 @@ export async function postDisplacement(data: DataFormDisplacement) {
   try {
     const response = await axios.post(`${BASEURL}`, data);
     return response.data;
-  } catch (e: unknown) {
-    const error = e as AxiosError;
-    throw new Error(getErrorMessage(error));
+  }  catch (e: unknown) {
+      return e 
   }
 }
 

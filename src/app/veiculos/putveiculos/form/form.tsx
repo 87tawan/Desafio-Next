@@ -47,7 +47,7 @@ export default function VehicleUpdate() {
         anoFabricacao: response.data.anoFabricacao,
         kmAtual: response.data.kmAtual
       })
-      setBASEURLPUT(`https://api-deslocamento.herokuapp.com/api/v1/Deslocamento`)
+      setBASEURLPUT(`https://api-deslocamento.herokuapp.com/api/v1/Veiculo`)
     } catch (err) {
       setError("Veiculo não encontrado")
     }

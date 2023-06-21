@@ -60,7 +60,6 @@ export default function VehicleUpdate() {
 
   return (
     <Box display="flex" flexDirection="column">
-      <p>Vamos atualizar seu veiculo!</p>
       <TextField
         label="id"
         value={id}

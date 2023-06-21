@@ -1,154 +1,84 @@
-import React, { useState } from "react";
-import { TextField, Button, Box, Typography } from "@mui/material";
-import { postDisplacement } from "@/services/Posts";
-import { DataFormDisplacement } from "@/interfaces/Displacement";
+import MyModal from "@/components/Modal"
+import { DataFormVehiclesPut } from "@/interfaces/Vehicles"
+import { getDisplacementById } from "@/services/GetsById"
+import { TextField, Box, Button, Typography } from "@mui/material"
+import { useState, useEffect, ChangeEvent } from "react"
 
-export default function FormClients() {
-  const [response, setResponse] = useState("");
-  const [error, setError] = useState("");
-  const [data, setData] = useState<DataFormDisplacement>({
-    kmInicial: 0,
-    inicioDeslocamento: new Date(),
-    checkList: "",
-    motivo: "",
-    observacao: "",
-    idCondutor: 0,
-    idVeiculo: 0,
-    idCliente: 0,
-  });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+export default function VehicleUpdate() {
+  const BASEURL = `https://api-deslocamento.herokuapp.com/api/v1/Veiculo`
 
- 
+  const [id, setId] = useState(0)
+  const [error, setError] = useState("")
+  const [endpoint, setEndPoint] = useState("")
+  const [BASEURLPUT, setBASEURLPUT] = useState("")
+  // Existe esse dataModified por conta dos valores permitidos para modificar.
+  const [dataModified, setDataModified] = useState<DataFormVehiclesPut>({
+    id: 0,
+    marcaModelo: "",
+    anoFabricacao: 0,
+    kmAtual: 0
+  })
 
-    // Lógica para enviar os dados do formulário
+  const resetData = () => {
+    setDataModified({
+      id: 0,
+      marcaModelo: '',
+      anoFabricacao: 0,
+      kmAtual: 0
+    })
+  }
 
-    console.log("Dados do formulário:", data);
+  const getDisplacementByIdConst = async () => {
+    resetData()
+    setError("")
 
-    const result = async () => {
-      try {
-        const created = await postDisplacement(data);
-        setResponse("Você criou um novo deslocamento! Meus parabéns.");
-        setError("");
-        console.log(created);
-      } catch (err: any) {
-        setError(err.message);
-      }
+    if (!id) {
+      setError("Digite um id")
+      return
     }
 
-    result();
+    try {
+      const response = await getDisplacementById(id)
+      setEndPoint(`${BASEURL}`)
+      setDataModified({
+        id: response.data.id,
+        marcaModelo: response.data.marcaModelo,
+        anoFabricacao: response.data.anoFabricacao,
+        kmAtual: response.data.kmAtual
+      })
+      setBASEURLPUT(`https://api-deslocamento.herokuapp.com/api/v1/Deslocamento`)
+    } catch (err) {
+      setError("Deslocamento não encontrado")
+    }
+    console.log(dataModified)
+  }
 
-    // Limpar os campos após o envio
-    setData({
-      kmInicial: 0,
-      inicioDeslocamento: new Date(),
-      checkList: "",
-      motivo: "",
-      observacao: "",
-      idCondutor: 0,
-      idVeiculo: 0,
-      idCliente: 0,
-    });
-  };
-
-  const handleChange =
-    (field: keyof DataFormDisplacement) =>
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setData((prevData) => ({ ...prevData, [field]: e.target.value }));
-    };
+  useEffect(() => {
+    // Atualiza a interface quando o estado de error é alterado
+  }, [error])
 
   return (
-    <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column" paddingTop="140px">
-      <p>Cadastre um novo veículo!</p>
-      <form onSubmit={handleSubmit}>
-        <Box display="flex" flexDirection="column">
-          <TextField
-            type="number"
-            label="Quilometragem Inicial"
-            value={data.kmInicial}
-            onChange={handleChange("kmInicial")}
-            fullWidth
-            margin="normal"
-            required
-          />
-          <TextField
-            type="date"
-            label="Início do Deslocamento"
-            value={data.inicioDeslocamento.toISOString().substring(0, 10)}
-            onChange={handleChange("inicioDeslocamento")}
-            fullWidth
-            margin="normal"
-            required
-          />
-          <TextField
-            label="Checklist"
-            value={data.checkList}
-            onChange={handleChange("checkList")}
-            fullWidth
-            margin="normal"
-            required
-          />
-          <TextField
-            label="Motivo"
-            value={data.motivo}
-            onChange={handleChange("motivo")}
-            fullWidth
-            margin="normal"
-            required
-          />
-          <TextField
-            label="Observação"
-            value={data.observacao}
-            onChange={handleChange("observacao")}
-            fullWidth
-            margin="normal"
-            required
-          />
-          <TextField
-            type="number"
-            label="ID do Condutor"
-            value={data.idCondutor}
-            onChange={handleChange("idCondutor")}
-            fullWidth
-            margin="normal"
-            required
-          />
-          <TextField
-            type="number"
-            label="ID do Veículo"
-            value={data.idVeiculo}
-            onChange={handleChange("idVeiculo")}
-            fullWidth
-            margin="normal"
-            required
-          />
-          <TextField
-            type="number"
-            label="ID do Cliente"
-            value={data.idCliente}
-            onChange={handleChange("idCliente")}
-            fullWidth
-            margin="normal"
-            required
-          />
-        </Box>
-        <Button type="submit" variant="contained" color="success" fullWidth>
-          Enviar
-        </Button>
+    <Box display="flex" flexDirection="column">
+      <TextField
+        label="id"
+        value={id}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => setId(Number(e.target.value))}
+        type="number"
+      />
 
-        {response && (
-          <Typography textAlign="center" sx={{ color: "green" }}>
-            {response}
-          </Typography>
-        )}
+      <Button variant="contained" sx={{ background: "purple" }} onClick={getDisplacementByIdConst}>
+        Buscar
+      </Button>
+      {error && (
+        <Typography color="error" textAlign="center">
+          {error}
+        </Typography>
+      )}
 
-        {error && (
-          <Typography textAlign="center" sx={{ color: "red" }}>
-            {error}
-          </Typography>
-        )}
-      </form>
+      {dataModified.id != 0 && (
+        <MyModal dataModified={dataModified} endpoint={endpoint}  id={id} />
+      )}
     </Box>
-  );
+  )
 }

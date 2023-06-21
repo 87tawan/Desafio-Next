@@ -7,9 +7,10 @@ export interface DataFormVehicles {
   }
   
   export interface DataFormVehiclesPut {
-    placa: string,
+    id: number,
     marcaModelo: string,
     anoFabricacao: number,
     kmAtual: number
   }
+  
   

@@ -5,8 +5,8 @@ import { TextField, Box, Button, Typography } from "@mui/material"
 import { useState, useEffect, ChangeEvent } from "react"
 
 
-export default function CondutorUpdate() {
-  const BASEURL = `https://api-deslocamento.herokuapp.com/api/v1/Condutor`
+export default function DeslocamentoUpdate() {
+  const BASEURL = `https://api-deslocamento.herokuapp.com/api/v1/Deslocamento`
 
   const [id, setId] = useState(0)
   const [error, setError] = useState("")

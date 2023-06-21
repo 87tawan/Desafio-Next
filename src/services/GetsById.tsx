@@ -39,3 +39,16 @@ export async function getDisplacementById(id: number) {
     throw new Error(getErrorMessage(error));
   }
 }
+
+
+
+export async function getVehicleById(id: number) {
+  const BASEURL = `https://api-deslocamento.herokuapp.com/api/v1/Veiculo/${id}`;
+  try {
+    const response = await axios.get(`${BASEURL}`);
+    return response;
+  } catch (e: unknown) {
+    const error = e as AxiosError;
+    throw new Error(getErrorMessage(error));
+  }
+}

@@ -1,6 +1,7 @@
 import MyModal from "@/components/Modal"
 import { DataFormVehiclesPut } from "@/interfaces/Vehicles"
-import { getDisplacementById } from "@/services/GetsById"
+import { getVehicleById } from "@/services/GetsById"
+
 import { TextField, Box, Button, Typography } from "@mui/material"
 import { useState, useEffect, ChangeEvent } from "react"
 
@@ -11,7 +12,6 @@ export default function VehicleUpdate() {
   const [id, setId] = useState(0)
   const [error, setError] = useState("")
   const [endpoint, setEndPoint] = useState("")
-  const [BASEURLPUT, setBASEURLPUT] = useState("")
   // Existe esse dataModified por conta dos valores permitidos para modificar.
   const [dataModified, setDataModified] = useState<DataFormVehiclesPut>({
     id: 0,
@@ -29,7 +29,7 @@ export default function VehicleUpdate() {
     })
   }
 
-  const getDisplacementByIdConst = async () => {
+  const getVehicleConst = async () => {
     resetData()
     setError("")
 
@@ -39,7 +39,7 @@ export default function VehicleUpdate() {
     }
 
     try {
-      const response = await getDisplacementById(id)
+      const response = await getVehicleById(id)
       setEndPoint(`${BASEURL}`)
       setDataModified({
         id: response.data.id,
@@ -47,7 +47,6 @@ export default function VehicleUpdate() {
         anoFabricacao: response.data.anoFabricacao,
         kmAtual: response.data.kmAtual
       })
-      setBASEURLPUT(`https://api-deslocamento.herokuapp.com/api/v1/Veiculo`)
     } catch (err) {
       setError("Veiculo não encontrado")
     }
@@ -67,7 +66,7 @@ export default function VehicleUpdate() {
         type="number"
       />
 
-      <Button variant="contained" sx={{ background: "purple" }} onClick={getDisplacementByIdConst}>
+      <Button variant="contained" sx={{ background: "purple" }} onClick={getVehicleConst}>
         Buscar
       </Button>
       {error && (

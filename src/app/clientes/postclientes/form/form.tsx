@@ -23,6 +23,21 @@ export default function FormClients() {
     // Lógica para enviar os dados do formulário
     console.log("Dados do formulário:", data)
 
+    if(data.numero.toString().length > 4 || data.numero.toString().length < 2 )  {
+      setError("Numero inexistente.")
+      return
+    }
+
+    if(data.numeroDocumento.toString().length < 7) {
+      setError("O numero de documento precisa ter mais de 7 digitos.")
+      return 
+    }
+
+    if(data.tipoDocumento.length < 2 || data.tipoDocumento.length > 10) {
+      setError("Esse tipo de documento não existe.")
+      return
+    }
+
     const result = async () => {
       try {
         const created = await postClients(data)
@@ -62,6 +77,7 @@ export default function FormClients() {
             value={data.numeroDocumento}
             onChange={handleChange("numeroDocumento")}
             fullWidth
+            type="number"
             margin="normal"
             required
           />
@@ -94,6 +110,7 @@ export default function FormClients() {
             value={data.numero}
             onChange={handleChange("numero")}
             fullWidth
+            type="number"
             margin="normal"
             required
           />

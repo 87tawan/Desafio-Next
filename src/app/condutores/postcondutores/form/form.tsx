@@ -20,9 +20,6 @@ export default function FormClients() {
 
     // Lógica para enviar os dados do formulário
 
-    console.log("Dados do formulário:", data)
-
-    console.log(data.nome)
     if(data.nome.trim().length <= 5) {
       setResponse("")
       setError("Seu nome precisa ter mais que 5 digitos.")

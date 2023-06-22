@@ -17,21 +17,23 @@ export default function FormClients() {
     idCliente: 0,
   })
 
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
     console.log("Dados do formulário:", data)
-
     const result = async () => {
       try {
         const created = await postDisplacement(data)
+        console.log(created)
+        console.log(data)
 
-        if(created.response.data) {
+        if (created.response && created.response.data) {
           setError(created.response.data)
-          return 
+          setResponse("")
+          return
         } else {
-          setResponse(`Você criou um novo deslocamento!`)
+          setResponse("Você criou um novo deslocamento!")
+          setError("")
         }
       } catch (err: any) {
         console.log(err)
@@ -42,11 +44,9 @@ export default function FormClients() {
 
   }
 
-  
   const handleChange = (field: keyof DataFormDisplacement) => (e: React.ChangeEvent<HTMLInputElement>) => {
     setData(prevData => ({ ...prevData, [field]: e.target.value as string }))
   }
-
 
   return (
     <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column" paddingTop="140px">

@@ -54,7 +54,14 @@ export default function UserModal({ dataModified, endpoint, endpointDisplacement
         setSuccess(`O registro com o id: ${id} foi atualizado com sucesso!`)
         handleClose()
       } catch (error: any) {
-        setError(error.response.data)
+        console.log(error)
+        if(error.response.data.title) {
+          setError("Km final precisa ser numero, e o deslocamento final precisa ser uma data.")
+        } else {
+          setError(error.response.data)
+        }
+     
+        
       }
     }
   }

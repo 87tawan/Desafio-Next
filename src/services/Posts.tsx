@@ -32,16 +32,16 @@ export async function postVehicles(data: DataFormVehicles) {
     throw new Error(getErrorMessage(error));
   }
 }
-
 export async function postDisplacement(data: DataFormDisplacement) {
   const BASEURL = "https://api-deslocamento.herokuapp.com/api/v1/Deslocamento/IniciarDeslocamento";
   try {
     const response = await axios.post(`${BASEURL}`, data);
     return response.data;
-  }  catch (e: unknown) {
-      return e 
+  } catch (error) {
+    return error;
   }
 }
+
 
 export async function postCondutors(data: DataFormCondutors) {
   const BASEURL = "https://api-deslocamento.herokuapp.com/api/v1/Condutor";

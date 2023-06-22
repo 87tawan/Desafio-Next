@@ -5,7 +5,7 @@ import { TextField, Box, Button, Typography } from "@mui/material"
 import { useState, useEffect, ChangeEvent } from "react"
 
 
-export default function DeslocamentoUpdate() {
+export default function DisplacementUpdate() {
   const BASEURL = `https://api-deslocamento.herokuapp.com/api/v1/Deslocamento`
 
   const [id, setId] = useState(0)

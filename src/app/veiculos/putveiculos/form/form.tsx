@@ -34,7 +34,8 @@ export default function VehicleUpdate() {
     if (!id) {
       setError("Digite um id");
       return;
-    }
+    } 
+
 
     try {
       const response = await getVehicleById(id);

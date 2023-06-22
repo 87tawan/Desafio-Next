@@ -19,6 +19,18 @@ export default function FormClients() {
     // Lógica para enviar os dados do formulário
     console.log("Dados do formulário:", data)
 
+    if(data.anoFabricacao.toString().length !== 4) {
+      setResponse("")
+      setError("Ano de Fabricação precisa ter 4 digitos")
+      return
+    }
+
+    if(data.kmAtual.toString().length < 2) {
+      setResponse("")
+      setError("Km atual precisa ter mais de um digito.")
+      return
+    }
+
     const result = async () => {
       try {
         const created = await postVehicles(data)

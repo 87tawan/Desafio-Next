@@ -1,6 +1,6 @@
 "use client"
 import ContainerComponent from "@/components/Container"
-import { Button } from "@mui/material"
+import { Button, Box } from "@mui/material"
 import { useEffect, useState } from "react"
 import { getClients } from "@/services/Gets"
 import DataTable from "@/components/Table"
@@ -11,6 +11,11 @@ export default function Home() {
   const next = () => {
     router.push("/clientes/postclientes")
   }
+  const back = () => {
+    router.push("/home")
+  }
+
+
   const [data, setData] = useState([])
 
   useEffect(() => {
@@ -25,9 +30,14 @@ export default function Home() {
     <ContainerComponent>
       <DataTable data={data} />
 
+      <Box display='flex' gap='0.5rem'>
+      <Button variant="contained" onClick={back}>
+        Voltar Pagina
+      </Button>
       <Button variant="contained" onClick={next}>
         Proxima Pagina
       </Button>
+      </Box>
     </ContainerComponent>
   )
 }

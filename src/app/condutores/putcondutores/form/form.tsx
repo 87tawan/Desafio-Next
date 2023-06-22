@@ -37,10 +37,11 @@ export default function CondutorUpdate() {
 
     try {
       const response = await getCondutorsById(id)
+      console.log(response)
       setEndPoint(`${BASEURL}`)
       setDataModified({
         id: response.data.id,
-        categoriaHabilitacao: response.data.categoriaHabilitacao,
+        categoriaHabilitacao: response.data.catergoriaHabilitacao,
         vencimentoHabilitacao: response.data.vencimentoHabilitacao,
       
       })

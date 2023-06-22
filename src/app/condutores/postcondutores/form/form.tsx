@@ -25,11 +25,11 @@ export default function FormClients() {
     const result = async () => {
       try {
         const created = await postCondutors(data)
-        setResponse("Você criou um novo condutor! Meus parabéns.")
+        setResponse(`Você criou um novo condutor! Lembre-se desse id:.. ${created}`)
         setError("")
         console.log(created)
       } catch (err: any) {
-        setResponse(err.response.data)
+        setError(err.response.data)
       }
     }
 

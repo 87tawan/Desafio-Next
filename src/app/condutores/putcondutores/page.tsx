@@ -1,7 +1,7 @@
 "use client"
 import ContainerComponent from "@/components/Container"
 
-import { Button, Link } from "@mui/material"
+import { Button, Link, Box } from "@mui/material"
 import { useRouter } from "next/navigation"
 import Form from "./form/form"
 export default function Home() {
@@ -9,6 +9,10 @@ export default function Home() {
 
   const next = () => {
     router.push("/end")
+  }
+
+  const back = () => {
+    router.push("/condutores/postcondutores")
   }
 
   return (
@@ -24,9 +28,15 @@ export default function Home() {
       </Link>
 
       <Form></Form>
-      <Button variant="contained" onClick={next}>
-        Proxima Pagina
-      </Button>
+
+      <Box display="flex" gap="0.5rem">
+        <Button variant="contained" onClick={back}>
+          Voltar Pagina
+        </Button>
+        <Button variant="contained" onClick={next}>
+          Proxima Pagina
+        </Button>
+      </Box>
     </ContainerComponent>
   )
 }

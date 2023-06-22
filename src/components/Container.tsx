@@ -14,7 +14,8 @@ export default function ContainerComponent({ children }: ContainerComponentProps
         alignItems: 'center',
         flexDirection: 'column',
         textAlign: 'center',
-        gap: '2rem'
+        gap: '2rem',
+        marginBottom: '150px'
       }}
     >
       {children}

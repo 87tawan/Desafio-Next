@@ -22,6 +22,26 @@ export default function FormClients() {
 
     console.log("Dados do formulário:", data)
 
+    console.log(data.nome)
+    if(data.nome.trim().length <= 5) {
+      setResponse("")
+      setError("Seu nome precisa ter mais que 5 digitos.")
+      return
+    }
+
+    if(data.numeroHabilitacao.trim().length < 2) {
+      setResponse("")
+      setError("O seu numero de habilitação precisa ter no minimo dois digitos.")
+      return
+    }
+
+    if(data.categoriaHabilitacao.trim().length < 2) {
+      setResponse("")
+      setError("A categoria da sua habilitação precisa ter no minimo dois digitos.")
+      return
+    }
+
+
     const result = async () => {
       try {
         const created = await postCondutors(data)

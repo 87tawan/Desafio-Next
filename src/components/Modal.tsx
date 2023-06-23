@@ -38,6 +38,7 @@ export default function UserModal({ dataModified, endpoint, endpointDisplacement
     })
   }
   const handleSubmit = async () => {
+    setError('')
     if (!endpointDisplacement) {
       try {
         const response = await axios.put(`${endpoint}/${id}`, formData)

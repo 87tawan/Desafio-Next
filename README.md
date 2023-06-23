@@ -1,34 +1,23 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Primeiro eu tive a ideia de fazer uma rota, e nessa rota ter já a opção de deletar e exluir,
+assim como em tabelas normais, mas para ser um pouco diferente, resolvi fazer dessa forma..
 
-## Getting Started
+Essa aplicação foi dividida da seguinte forma:
 
-First, run the development server:
+Cada rota terá uma pasta especifica, e dentro dela terá uma pasta para cada metodo especifico 
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+Terá um componente Table e um componente Model, ambos os componentes são reaproveitados por todas
+as rotas
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Terá um componente Container, que irá definir a largura e altura padrão
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Terá uma pasta interfaces, para definir regras de tipagem para cada rota
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+Dentro de todas as rotas put, também terá incluido o delete.
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Muito obrigado pela oportunidade, espero que gostem!
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+https://desafio-nextting.vercel.app/

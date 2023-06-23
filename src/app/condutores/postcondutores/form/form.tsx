@@ -8,7 +8,7 @@ export default function FormClients() {
   const [error, setError] = useState("")
   const [data, setData] = useState<DataFormCondutors>({
     nome: "",
-    numeroHabilitacao: "",
+    numeroHabilitacao: 0,
     categoriaHabilitacao: "",
     vencimentoHabilitacao: new Date(),
   })
@@ -25,10 +25,10 @@ export default function FormClients() {
       setError("Seu nome precisa ter mais que 5 digitos.")
       return
     }
-
-    if(data.numeroHabilitacao.trim().length < 2) {
+    //passando para string, pois na API está documentada dessa forma.
+    if(data.numeroHabilitacao.toString().length <= 7) {
       setResponse("")
-      setError("O seu numero de habilitação precisa ter no minimo dois digitos.")
+      setError("O seu numero de habilitação precisa ter no minimo sete digitos.")
       return
     }
 
@@ -55,7 +55,7 @@ export default function FormClients() {
     // Limpar os campos após o envio
     setData({
       nome: "",
-      numeroHabilitacao: "",
+      numeroHabilitacao: 0,
       categoriaHabilitacao: "",
       vencimentoHabilitacao: new Date(),
     })
@@ -83,6 +83,7 @@ export default function FormClients() {
             value={data.numeroHabilitacao}
             onChange={handleChange("numeroHabilitacao")}
             fullWidth
+            type="number"
             margin="normal"
             required
           />

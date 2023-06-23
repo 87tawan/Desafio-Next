@@ -1,7 +1,7 @@
 
 export interface DataFormCondutors {
     nome: string,
-    numeroHabilitacao: string,
+    numeroHabilitacao: number,
     categoriaHabilitacao: string,
     vencimentoHabilitacao: Date
   }
